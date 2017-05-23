@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">JavaAndJsDemo</string>
+    <string name="title_activity_js_call_java_video">JsCallJavaVideoActivity</string>
+</resources>
