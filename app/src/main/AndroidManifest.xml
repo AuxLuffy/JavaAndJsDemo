@@ -32,7 +32,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".KotlinActivity"></activity>
+        <activity android:name=".KotlinActivity" />
+        <activity android:name=".ScrollViewAndWebView"></activity>
     </application>
 
 </manifest>

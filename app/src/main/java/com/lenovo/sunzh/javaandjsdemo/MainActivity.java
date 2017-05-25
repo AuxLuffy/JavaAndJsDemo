@@ -54,7 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_js_call_java:
                 // Handle clicks for btnJsCallJava
-                Intent intent2 = new Intent(this, JsCallJavaVideoActivity.class);
+//                Intent intent2 = new Intent(this, JsCallJavaVideoActivity.class);
+                Intent intent2 = new Intent(this, ScrollViewAndWebView.class);
 //                float tv_18_size = MainActivity.this.getResources().getDimension(R.dimen.tv_18_size);
 ////                Toast.makeText(MainActivity.this, "R.dimen.tv_18_size = " + tv_18_size, Toast.LENGTH_SHORT).show();
 //                Toast.makeText(MainActivity.this, "默认字体大小为：" + text.getTextSize(), Toast.LENGTH_SHORT).show();
