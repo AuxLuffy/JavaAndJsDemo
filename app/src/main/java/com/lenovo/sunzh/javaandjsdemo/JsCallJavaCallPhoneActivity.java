@@ -63,8 +63,26 @@ public class JsCallJavaCallPhoneActivity extends AppCompatActivity {
         //加载网络资源
 //        webView.loadUrl("http://10.0.2.2:8080/assets/JavaAndJavaScriptCall.html");
 //        webView.loadUrl("file:///android_asset/JsCallJavaCallPhone.html");
-        webView.loadUrl("http://www.jianshu.com/");
+        webView.loadUrl("http://www.baidu.com/");
 
+    }
+
+    public void supportFlash(){
+
+        String temp =
+                "\"> "
+
+                + "\" height=\"" + "90%" + "\" scale=\"" + "noscale"
+
+                + "\" type=\"" + "application/x-shockwave-flash"
+
+                + "\"> ";
+
+        String mimeType = "text/html";
+
+        String encoding = "utf-8";
+
+        webView.loadDataWithBaseURL("null", temp, mimeType, encoding, "");
     }
 
     private class AndroidAndJSInterface {

@@ -7,6 +7,30 @@
     <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#f00"
+            android:layout_x="10dp"
+            android:layout_y="10dp"
+            android:text="刷新"
+            />
+    </WebView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="#fff"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="2dp"
+        android:layout_height="wrap_content">
+        <EditText
+            android:hint="写点什么"
+            android:id="@+id/et_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 
 </RelativeLayout>

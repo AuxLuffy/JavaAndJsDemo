@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -100,6 +101,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                } catch (FileNotFoundException e) {
 //                    e.printStackTrace();
 //                }
+                break;
+            case R.id.text:
+                new WebView(this).clearCache(true);
+                Toast.makeText(MainActivity.this, "清除缓存！", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

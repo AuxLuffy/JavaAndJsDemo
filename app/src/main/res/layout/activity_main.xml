@@ -1,54 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical">
-
-<LinearLayout
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:background="@android:color/holo_blue_light"
-    android:gravity="center">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/holo_blue_light"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Android和H5互调"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_java_and_js"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Android和H5互调"
+        android:text="1.Java代码和H5代码互调"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
 
-</LinearLayout>
+    <Button
+        android:id="@+id/btn_js_call_java"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2.H5调用Android播放视频"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
 
-<Button
-    android:id="@+id/btn_java_and_js"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="1.Java代码和H5代码互调"
-    android:textColor="@android:color/black"
-    android:textSize="20sp" />
-
-<Button
-    android:id="@+id/btn_js_call_java"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="2.H5调用Android播放视频"
-    android:textColor="@android:color/black"
-    android:textSize="20sp" />
-
-<Button
-    android:id="@+id/btn_js_call_phone"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="3.H5调用Android拨打电话"
-    android:textColor="@android:color/black"
-    android:textSize="20sp" />
+    <Button
+        android:id="@+id/btn_js_call_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="3.H5调用Android拨打电话"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="你好啊！"
-        />
+        android:text="你好啊！" />
 
 </LinearLayout>
