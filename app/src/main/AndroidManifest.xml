@@ -32,9 +32,11 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".KotlinActivity"
-            android:theme="@style/Base.Theme.AppCompat.Dialog"/>
-        <activity android:name=".ScrollViewAndWebView"></activity>
+        <activity
+            android:name=".KotlinActivity"
+            android:theme="@style/Base.Theme.AppCompat.Dialog" />
+        <activity android:name=".ScrollViewAndWebView" />
+        <activity android:name=".H5Activity" android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
