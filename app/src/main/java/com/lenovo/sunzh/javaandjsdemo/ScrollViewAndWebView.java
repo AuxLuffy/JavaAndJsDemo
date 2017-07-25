@@ -1,19 +1,32 @@
 package com.lenovo.sunzh.javaandjsdemo;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.provider.Settings;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
-public class ScrollViewAndWebView extends AppCompatActivity {
+import java.util.HashMap;
 
+public class ScrollViewAndWebView extends Activity {
+
+    private static final String TAG = "ScrollViewAndWebView";
     private WebView mWebview;
     private ScrollView mScrollView;
     private WebSettings settings;
+    private HashMap<String, Integer> map = new HashMap<>();
+    private boolean backpress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +35,41 @@ public class ScrollViewAndWebView extends AppCompatActivity {
         initView();
         initData();
     }
+
+    public void refresh(View v) {
+//        mWebview.reload();
+        openNotificationSettings();
+    }
+
+    /**
+     * 打开app通知设置
+     */
+    private void openNotificationSettings(){
+        try {
+
+            Intent intent = new Intent();
+
+            intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+
+            intent.putExtra("app_package", getPackageName());
+
+            intent.putExtra("app_uid", getApplicationInfo().uid);
+
+            startActivity(intent);
+
+        } catch (ActivityNotFoundException e) {
+
+            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+
+            Uri uri = Uri.fromParts("package", getPackageName(), null);
+
+            intent.setData(uri);
+
+            startActivity(intent);
+
+        }
+    }
+
 
     private void initData() {
         settings = mWebview.getSettings();
@@ -48,15 +96,67 @@ public class ScrollViewAndWebView extends AppCompatActivity {
 //        mWebview.clearHistory();
         mWebview.setWebViewClient(new WebViewClient() {
             @Override
-            public void onPageFinished(WebView view, String url) {
+            public void onPageFinished(WebView view, final String url) {
+
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//                    mWebview.evaluateJavascript("js方法", new ValueCallback<String>() {
+//                        @Override
+//                        public void onReceiveValue(String value) {
+//                            if (backpress) {
+//                                if (null != value && value.startsWith("\"")) {
+//                                    value = value.substring(1);
+//                                }
+//                                Iterator<Map.Entry<String, Integer>> iter = map.entrySet().iterator();
+//                                while (iter.hasNext()) {
+//                                    Map.Entry<String, Integer> entry = iter.next();
+//                                    if (url.contains(entry.getKey().toString())) {
+//                                        mWebview.scrollTo(0, map.get(entry.getKey()));
+//                                    }
+//                                }
+//                                backpress = false;
+//                            } else {
+//                                mScrollView.scrollTo(0, 0);
+//                            }
+//                        }
+//                    });
+//                } else {
+//                    if (backpress) {
+//                        mWebview.loadUrl("javascript:onWebviewFinishLoad();");
+//                        backpress = false;
+//                    } else {
+//                        mScrollView.scrollTo(0, 0);
+//                    }
+//                }
+                Log.e(TAG, "onPageFinished-------");
                 mScrollView.scrollTo(0, 0);
                 //                javascript:App.resize(document.body.getBoundingClientRect().height)
                 mWebview.loadUrl("javascript:App.resize(document.body.getBoundingClientRect().height)");
+
                 super.onPageFinished(view, url);
-//                int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-//                int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-//
-//                mWebview.measure(w, h);
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+
+                Log.e(TAG, "shouldOverrideUrlLoading----");
+//                WebBackForwardList backForwardList = mWebview.copyBackForwardList();
+//                if (backForwardList != null && backForwardList.getSize() != 0) {
+//                    int currentIndex = backForwardList.getCurrentIndex();
+//                    WebHistoryItem historyItem = backForwardList.getItemAtIndex(currentIndex);
+//                    if (historyItem != null) {
+//                        String backPageUrl = historyItem.getUrl();
+//                        int scrollY = mWebview.getScrollY();
+//                        map.put(backPageUrl, scrollY);
+//                    }
+//                }
+                view.loadUrl(url);
+                return false;
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                Log.e(TAG, "onPageStarted");
+                super.onPageStarted(view, url, favicon);
             }
         });
         mWebview.addJavascriptInterface(this, "App");
@@ -69,7 +169,7 @@ public class ScrollViewAndWebView extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mWebview.setLayoutParams(new FrameLayout.LayoutParams(getResources().getDisplayMetrics().widthPixels, (int) (height * getResources().getDisplayMetrics().density)));
+                mWebview.setLayoutParams(new RelativeLayout.LayoutParams(getResources().getDisplayMetrics().widthPixels, (int) (height * getResources().getDisplayMetrics().density)));
             }
         });
     }
@@ -89,5 +189,15 @@ public class ScrollViewAndWebView extends AppCompatActivity {
     private void initView() {
         mWebview = (WebView) findViewById(R.id.webview);
         mScrollView = (ScrollView) findViewById(R.id.scrollView);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && mWebview.canGoBack()) {
+            backpress = true;
+            mWebview.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
