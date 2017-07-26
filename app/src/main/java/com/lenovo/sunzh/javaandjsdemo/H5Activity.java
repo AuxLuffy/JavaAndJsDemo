@@ -25,7 +25,6 @@ import android.widget.ProgressBar;
 import com.jockeyjs.Jockey;
 import com.jockeyjs.JockeyAsyncHandler;
 import com.jockeyjs.JockeyImpl;
-import com.jockeyjs.converter.gson.GsonConverter;
 
 import java.util.Map;
 
@@ -125,7 +124,6 @@ public class H5Activity extends AppCompatActivity {
     }
 
     private void setupJockey() {
-//        mJockey = new Jockey.Builder().converter(new GsonConverter()).build();
         mJockey = JockeyImpl.getDefault();
         mJockey.configure(mWebView);
         mJockey.setWebViewClient(mWebViewClient);
@@ -164,6 +162,7 @@ public class H5Activity extends AppCompatActivity {
 
             @Override
             public void onPageFinished(WebView view, String url) {
+                Log.e("tag","onPageFinished");
                 super.onPageFinished(view, url);
             }
 
